@@ -2,17 +2,33 @@ const graphql = require('graphql')
 const axios = require('axios')
 const { GraphQLObjectType, GraphQLString, GraphQLInt, GraphQLSchema } = graphql
 
-// tells it what properties
+// needs to be before UserType
+const CompanyType = new GraphQLObjectType({
+  name: 'Company',
+  fields: {
+    id: { type: GraphQLString },
+    name: { type: GraphQLString },
+    description: { type: GraphQLString },
+  },
+})
+
+// tells it what properties, and associating company with user. Then need to find a resolve fn on this property, so graphql knows how to find the company associated with a given user.
 const UserType = new GraphQLObjectType({
   name: 'User',
   fields: {
     id: { type: GraphQLString },
     firstName: { type: GraphQLString },
     age: { type: GraphQLInt },
+    company: {
+      type: CompanyType,
+      resolve(parentValue, args) {
+        console.log(parentValue, args)
+      },
+    },
   },
 })
 
-// entry point, if give a user id, will return a user back to you
+// entry point, if give a user id, will return a user back to you. because resolver can handle a promise, can fetch data from just about anywhere.
 const RootQuery = new GraphQLObjectType({
   name: 'RootQueryType',
   fields: {
@@ -20,7 +36,9 @@ const RootQuery = new GraphQLObjectType({
       type: UserType,
       args: { id: { type: GraphQLString } },
       resolve(parentValue, args) {
-        return axios.get(`http://localhost:3000/users/${args.id}`)
+        return axios
+          .get(`http://localhost:3000/users/${args.id}`)
+          .then((resp) => resp.data)
       },
     },
   },
@@ -44,6 +62,6 @@ The previous content, tells us what our data looks like, the resolve fn's purpos
 
 parentValue notorious for never being used, we really care about the second argument, args, for example id will be present on args object.
 
-
+because resolver can handle a promise, can fetch data from just about anywhere.
 
 */

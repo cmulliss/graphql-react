@@ -81,3 +81,28 @@ http://localhost:3000/users/23
 - npm i --save axios
 - remove lodash, as not using static list anymore
 - import axios instead to schema
+
+### nodemon
+
+- watches over project and automatically restarts node server when any changes
+- npm i --save nodemon
+- separate script in package.json
+- "dev": "nodemon server.js"
+- then run with: npm run dev
+
+## json server anb data relationships
+
+- relationship between users and companies, json server has set this up behind the scenes.
+- can go to:
+- http://localhost:3000/companies/1/users
+- to see all users working at company with id 1
+- http://localhost:3000/companies/2/users
+  to see everyone workind at company with id 2.
+
+  ## Servers
+
+  - for node
+  - npm run dev
+
+- for json server
+- npm run json:server

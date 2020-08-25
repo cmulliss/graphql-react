@@ -8,7 +8,7 @@ app.use(
   '/graphql',
   graphqlHTTP({
     schema: schema,
-    graphiql: true
+    graphiql: true,
   })
 )
 
@@ -19,3 +19,4 @@ app.listen(4000, () => {
 })
 
 // express is an http server
+// node server.js
