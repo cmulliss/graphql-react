@@ -1,16 +1,11 @@
 const express = require('express')
 const { graphqlHTTP } = require('express-graphql')
-const schema = require('./schema/schema')
 
 const app = express()
 
-app.use(
-  '/graphql',
-  graphqlHTTP({
-    schema: schema,
-    graphiql: true,
-  })
-)
+app.use('/graphql', graphqlHTTP({
+  graphiql: true
+}))
 
 app.listen(4000, () => {
   console.log('Server started at:')
@@ -20,3 +15,4 @@ app.listen(4000, () => {
 
 // express is an http server
 // node server.js
+// needed to change code to use graphqlHTTP

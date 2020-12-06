@@ -106,3 +106,13 @@ http://localhost:3000/users/23
 
 - for json server
 - npm run json:server
+
+## Bidirectional Relationships
+
+- nav to json server
+- http://localhost:3000/
+- http://localhost:3000/companies
+- http://localhost:3000/companies/1
+- http://localhost:3000/companies/1/users (all users with id=1)
+
+can update the schema file, how to go from company to list of users
